@@ -1,24 +1,28 @@
 import { Component } from 'react';
 import SearchForm from '../components/SearchForm';
-import FilmsList from '../components/FilmsList';
-import filmsApi from '../services/films-api';
+import MoviesList from '../components/MoviesList';
+import moviesApi from '../services/movies-api';
 
 class MoviesPage extends Component {
   state = {
-    films: [],
+    movies: [],
+    error: null,
   };
 
   onSubmit = query => {
-    filmsApi.fetchFilm(query).then(films => this.setState({ films }));
+    moviesApi
+      .fetchMoviesByKeyword(query)
+      .then(movies => this.setState({ movies }))
+      .catch(error => this.setState({ error }));
   };
 
   render() {
-    const { films } = this.state;
+    const { movies } = this.state;
 
     return (
       <>
         <SearchForm onSubmit={this.onSubmit} />
-        <FilmsList films={films} />
+        <MoviesList movies={movies} />
       </>
     );
   }

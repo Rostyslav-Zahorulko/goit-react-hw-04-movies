@@ -1,21 +1,27 @@
 import { Component } from 'react';
-import FilmsList from '../components/FilmsList';
-import filmsApi from '../services/films-api';
+import MoviesList from '../components/MoviesList';
+import moviesApi from '../services/movies-api';
 
 class HomePage extends Component {
-  state = { films: [] };
+  state = {
+    movies: [],
+    error: null,
+  };
 
   componentDidMount() {
-    filmsApi.fetchTrends().then(trends => this.setState({ films: trends }));
+    moviesApi
+      .fetchTrends()
+      .then(trends => this.setState({ movies: trends }))
+      .catch(error => this.setState({ error }));
   }
 
   render() {
-    const { films } = this.state;
+    const { movies } = this.state;
 
     return (
       <>
         <h1>Trending today</h1>
-        <FilmsList films={films} />
+        <MoviesList movies={movies} />
       </>
     );
   }
