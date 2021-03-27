@@ -1,5 +1,6 @@
 import { Route, NavLink, Switch } from 'react-router-dom';
-import HomeView from './views/HomeView';
+import HomePage from './pages/HomePage';
+import MoviesPage from './pages/MoviesPage';
 
 const App = () => {
   return (
@@ -7,13 +8,18 @@ const App = () => {
       <ul>
         <li>
           <NavLink exact to="/">
-            HomeView
+            Home
           </NavLink>
         </li>
-        <li>Movies</li>
+        <li>
+          <NavLink to="./movies">Movies</NavLink>
+        </li>
       </ul>
 
-      <Route path="/" component={HomeView} />
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route path="/movies" component={MoviesPage} />
+      </Switch>
     </>
   );
 };

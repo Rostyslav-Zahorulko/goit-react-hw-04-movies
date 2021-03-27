@@ -16,6 +16,16 @@ const fetchTrends = async () => {
   return response.data.results;
 };
 
-const filmsApi = { fetchTrends };
+const fetchFilm = async query => {
+  const response = await axios.get('/search/movie', {
+    params: { query },
+  });
+
+  // console.log(response.data.results);
+
+  return response.data.results;
+};
+
+const filmsApi = { fetchTrends, fetchFilm };
 
 export default filmsApi;

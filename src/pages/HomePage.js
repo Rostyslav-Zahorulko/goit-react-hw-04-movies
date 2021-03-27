@@ -1,7 +1,8 @@
 import { Component } from 'react';
+import FilmsList from '../components/FilmsList';
 import filmsApi from '../services/films-api';
 
-class HomeView extends Component {
+class HomePage extends Component {
   state = { films: [] };
 
   componentDidMount() {
@@ -14,14 +15,10 @@ class HomeView extends Component {
     return (
       <>
         <h1>Trending today</h1>
-        <ul>
-          {films.map(({ id, title, name }) => (
-            <li key={id}>{title || name}</li>
-          ))}
-        </ul>
+        <FilmsList films={films} />
       </>
     );
   }
 }
 
-export default HomeView;
+export default HomePage;
