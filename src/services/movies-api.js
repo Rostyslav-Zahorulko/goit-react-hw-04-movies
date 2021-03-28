@@ -43,11 +43,20 @@ const fetchMovieCredits = async movieId => {
   return response.data.cast;
 };
 
+const fetchMovieReviews = async movieId => {
+  const response = await axios.get(`/movie/${movieId}/reviews`);
+
+  // console.log(response.data.results);
+
+  return response.data.results;
+};
+
 const moviesApi = {
   fetchTrends,
   fetchMoviesByKeyword,
   fetchMovieDetails,
   fetchMovieCredits,
+  fetchMovieReviews,
   imageBaseUrl: IMAGE_BASE_URL,
 };
 

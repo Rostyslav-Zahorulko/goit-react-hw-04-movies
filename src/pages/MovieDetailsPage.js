@@ -1,7 +1,10 @@
 import { Component } from 'react';
 import { NavLink, Route } from 'react-router-dom';
 import Cast from '../components/Cast';
+import Reviews from '../components/Reviews';
 import moviesApi from '../services/movies-api';
+import defaultMoviePoster from '../images/defaultMoviePoster.jpg';
+import './MovieDetailsPage.scss';
 
 class MovieDetailsPage extends Component {
   state = {
@@ -55,44 +58,64 @@ class MovieDetailsPage extends Component {
       genres,
     } = this.state;
 
+    // console.log('poster_path: ', poster_path);
     // console.log('release_date: ', release_date);
     // console.log('vote_average: ', vote_average);
     // console.log('genres: ', genres);
 
+    const imgSrc = poster_path
+      ? moviesApi.imageBaseUrl + poster_path
+      : defaultMoviePoster;
     const movieReleaseYear = release_date ? this.getReleaseYear() : null;
     const userScore = vote_average ? this.getUserScore() : null;
     const movieGenres = genres ? this.getGenres() : null;
 
+    // console.log('imgSrc: ', imgSrc);
     // console.log('movieReleaseYear: ', movieReleaseYear);
     // console.log('userScore: ', userScore);
     // console.log('movieGenres', movieGenres);
 
     return (
       <>
-        <img
-          src={`${moviesApi.imageBaseUrl}${poster_path}`}
-          alt={title || name}
-        />
-        <h2>
-          {title || name} {`(${movieReleaseYear})`}
-        </h2>
+        <div className="movieCard">
+          <img width={200} src={imgSrc} alt={title || name} />
 
-        <p>User Score: {userScore + '%'}</p>
-        <h3>Overview</h3>
-        <p>{overview}</p>
-        <h4>Genres</h4>
-        <p>{movieGenres}</p>
+          <div className="movieCard__content">
+            <h2>
+              {title || name} ({movieReleaseYear})
+            </h2>
+            <p>User Score: {userScore}%</p>
+            <h3>Overview</h3>
+            <p>{overview}</p>
+            <h4>Genres</h4>
+            <p>{movieGenres}</p>
+          </div>
+        </div>
+
         <p>Additional information</p>
         <ul>
           <li>
-            <NavLink to={`${url}/cast`}>Cast</NavLink>
+            <NavLink
+              to={`${url}/cast`}
+              className="NavLink"
+              activeClassName="NavLink--active"
+            >
+              Cast
+            </NavLink>
           </li>
-          {/* <li>
-            <NavLink to={}>Reviews</NavLink>
-          </li> */}
+          <li>
+            <NavLink
+              to={`${url}/reviews`}
+              className="NavLink"
+              activeClassName="NavLink--active"
+            >
+              Reviews
+            </NavLink>
+          </li>
         </ul>
 
         <Route path={`${path}/cast`} component={Cast} />
+        <Route path={`${path}/reviews`} component={Reviews} />
       </>
     );
   }

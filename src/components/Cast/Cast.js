@@ -22,20 +22,19 @@ class Cast extends Component {
 
     return (
       <ul>
-        {casts &&
-          casts.map(({ id, name, profile_path, character }) => {
-            const imgSrc =
-              (profile_path && `${moviesApi.imageBaseUrl}${profile_path}`) ||
-              defaultActorAvatar;
+        {casts.map(({ id, name, profile_path, character }) => {
+          const imgSrc = profile_path
+            ? moviesApi.imageBaseUrl + profile_path
+            : defaultActorAvatar;
 
-            return (
-              <li key={id}>
-                <img width={100} src={imgSrc} alt={name} />
-                <p>{name}</p>
-                <p>Character: {character}</p>
-              </li>
-            );
-          })}
+          return (
+            <li key={id}>
+              <img width={100} src={imgSrc} alt={name} />
+              <p>{name}</p>
+              <p>Character: {character}</p>
+            </li>
+          );
+        })}
       </ul>
     );
   }
