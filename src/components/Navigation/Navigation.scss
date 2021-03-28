@@ -1,0 +1,21 @@
+.NavList {
+  display: flex;
+  margin: 0;
+  padding: 20px;
+}
+
+.NavList__item {
+  list-style-type: none;
+
+  &:not(:last-child) {
+    margin-right: 20px;
+  }
+}
+
+.NavLink {
+  color: currentColor;
+}
+
+.NavLink--active {
+  color: palevioletred;
+}

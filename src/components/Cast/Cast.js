@@ -4,7 +4,7 @@ import defaultActorAvatar from '../../images/defaultActorAvatar.svg';
 
 class Cast extends Component {
   state = {
-    casts: [],
+    cast: [],
     error: null,
   };
 
@@ -12,17 +12,17 @@ class Cast extends Component {
     const { movieId } = this.props.match.params;
 
     moviesApi
-      .fetchMovieCredits(movieId)
-      .then(casts => this.setState({ casts }))
+      .fetchMovieCast(movieId)
+      .then(actors => this.setState({ cast: actors }))
       .catch(error => this.setState({ error }));
   }
 
   render() {
-    const { casts } = this.state;
+    const { cast } = this.state;
 
     return (
       <ul>
-        {casts.map(({ id, name, profile_path, character }) => {
+        {cast.map(({ id, name, profile_path, character }) => {
           const imgSrc = profile_path
             ? moviesApi.imageBaseUrl + profile_path
             : defaultActorAvatar;

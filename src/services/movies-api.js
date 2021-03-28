@@ -35,7 +35,7 @@ const fetchMovieDetails = async movieId => {
   return response.data;
 };
 
-const fetchMovieCredits = async movieId => {
+const fetchMovieCast = async movieId => {
   const response = await axios.get(`/movie/${movieId}/credits`);
 
   // console.log(response.data.cast);
@@ -55,7 +55,7 @@ const moviesApi = {
   fetchTrends,
   fetchMoviesByKeyword,
   fetchMovieDetails,
-  fetchMovieCredits,
+  fetchMovieCast,
   fetchMovieReviews,
   imageBaseUrl: IMAGE_BASE_URL,
 };

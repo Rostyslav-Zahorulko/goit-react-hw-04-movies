@@ -1,10 +1,12 @@
 import { Component } from 'react';
-import { NavLink, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import MovieCard from '../components/MovieCard';
+import AdditionalNavigation from '../components/AdditionalNavigation';
+import ApologyMessage from '../components/ApologyMessage';
 import Cast from '../components/Cast';
 import Reviews from '../components/Reviews';
 import moviesApi from '../services/movies-api';
 import defaultMoviePoster from '../images/defaultMoviePoster.jpg';
-import './MovieDetailsPage.scss';
 
 class MovieDetailsPage extends Component {
   state = {
@@ -46,7 +48,7 @@ class MovieDetailsPage extends Component {
   };
 
   render() {
-    const { url, path } = this.props.match;
+    const { path } = this.props.match;
 
     const {
       poster_path,
@@ -56,6 +58,7 @@ class MovieDetailsPage extends Component {
       vote_average,
       overview,
       genres,
+      error,
     } = this.state;
 
     // console.log('poster_path: ', poster_path);
@@ -75,44 +78,26 @@ class MovieDetailsPage extends Component {
     // console.log('userScore: ', userScore);
     // console.log('movieGenres', movieGenres);
 
+    const options = {
+      imgSrc,
+      title,
+      name,
+      movieReleaseYear,
+      userScore,
+      overview,
+      movieGenres,
+    };
+
     return (
       <>
-        <div className="movieCard">
-          <img width={200} src={imgSrc} alt={title || name} />
-
-          <div className="movieCard__content">
-            <h2>
-              {title || name} ({movieReleaseYear})
-            </h2>
-            <p>User Score: {userScore}%</p>
-            <h3>Overview</h3>
-            <p>{overview}</p>
-            <h4>Genres</h4>
-            <p>{movieGenres}</p>
-          </div>
-        </div>
-
-        <p>Additional information</p>
-        <ul>
-          <li>
-            <NavLink
-              to={`${url}/cast`}
-              className="NavLink"
-              activeClassName="NavLink--active"
-            >
-              Cast
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to={`${url}/reviews`}
-              className="NavLink"
-              activeClassName="NavLink--active"
-            >
-              Reviews
-            </NavLink>
-          </li>
-        </ul>
+        {!error ? (
+          <>
+            <MovieCard options={options} />
+            <AdditionalNavigation />
+          </>
+        ) : (
+          <ApologyMessage />
+        )}
 
         <Route path={`${path}/cast`} component={Cast} />
         <Route path={`${path}/reviews`} component={Reviews} />
