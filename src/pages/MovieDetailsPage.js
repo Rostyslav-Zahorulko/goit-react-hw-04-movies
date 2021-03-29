@@ -1,5 +1,7 @@
 import { Component } from 'react';
 import { Route } from 'react-router-dom';
+import routes from '../routes';
+import GoBackButton from '../components/GoBackButton';
 import MovieCard from '../components/MovieCard';
 import AdditionalNavigation from '../components/AdditionalNavigation';
 import ApologyMessage from '../components/ApologyMessage';
@@ -47,8 +49,20 @@ class MovieDetailsPage extends Component {
     return genres.map(({ name }) => name).join(' ');
   };
 
+  handleGoBack = () => {
+    const { history, location } = this.props;
+
+    // if (location.state && location.state.from) {
+    //   return history.push(location.state.from);
+    // }
+
+    // history.push(routes.home);
+
+    history.push(location?.state?.from || routes.home);
+  };
+
   render() {
-    const { path } = this.props.match;
+    const { match } = this.props;
 
     const {
       poster_path,
@@ -79,12 +93,12 @@ class MovieDetailsPage extends Component {
     // console.log('movieGenres', movieGenres);
 
     const options = {
-      imgSrc,
       title,
       name,
+      overview,
+      imgSrc,
       movieReleaseYear,
       userScore,
-      overview,
       movieGenres,
     };
 
@@ -92,6 +106,7 @@ class MovieDetailsPage extends Component {
       <>
         {!error ? (
           <>
+            <GoBackButton onClick={this.handleGoBack} />
             <MovieCard options={options} />
             <AdditionalNavigation />
           </>
@@ -99,8 +114,8 @@ class MovieDetailsPage extends Component {
           <ApologyMessage />
         )}
 
-        <Route path={`${path}/cast`} component={Cast} />
-        <Route path={`${path}/reviews`} component={Reviews} />
+        <Route path={`${match.path}/cast`} component={Cast} />
+        <Route path={`${match.path}/reviews`} component={Reviews} />
       </>
     );
   }

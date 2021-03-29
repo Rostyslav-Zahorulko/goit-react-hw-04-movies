@@ -1,15 +1,22 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 
-const MoviesList = ({ movies }) => {
+const MoviesList = ({ movies, location }) => {
   return (
     <ul>
       {movies.map(({ id, title, name }) => (
         <li key={id}>
-          <NavLink to={`/movies/${id}`}>{title || name}</NavLink>
+          <NavLink
+            to={{
+              pathname: `/movies/${id}`,
+              state: { from: location },
+            }}
+          >
+            {title || name}
+          </NavLink>
         </li>
       ))}
     </ul>
   );
 };
 
-export default MoviesList;
+export default withRouter(MoviesList);

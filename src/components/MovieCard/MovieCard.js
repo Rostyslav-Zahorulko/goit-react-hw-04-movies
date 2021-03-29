@@ -2,12 +2,12 @@ import './MovieCard.scss';
 
 const MovieCard = ({ options }) => {
   const {
-    imgSrc,
     title,
     name,
+    overview,
+    imgSrc,
     movieReleaseYear,
     userScore,
-    overview,
     movieGenres,
   } = options;
 
