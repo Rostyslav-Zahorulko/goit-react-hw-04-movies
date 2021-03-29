@@ -1,5 +1,6 @@
 import { Suspense, lazy } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import Container from './components/Container';
 import AppBar from './components/AppBar';
 import routes from './routes';
 
@@ -17,7 +18,7 @@ const MovieDetailsPage = lazy(() =>
 
 const App = () => {
   return (
-    <>
+    <Container>
       <AppBar />
 
       <Suspense fallback={<div>Loading...</div>}>
@@ -31,7 +32,7 @@ const App = () => {
           <Route component={HomePage} />
         </Switch>
       </Suspense>
-    </>
+    </Container>
   );
 };
 

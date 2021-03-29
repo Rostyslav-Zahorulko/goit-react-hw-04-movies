@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import moviesApi from '../../services/movies-api';
 import defaultActorAvatar from '../../images/defaultActorAvatar.svg';
+import './Cast.scss';
 
 class Cast extends Component {
   state = {
@@ -28,7 +29,7 @@ class Cast extends Component {
             : defaultActorAvatar;
 
           return (
-            <li key={id}>
+            <li className="CastList__item" key={id}>
               <img width={100} src={imgSrc} alt={name} />
               <p>{name}</p>
               <p>Character: {character}</p>
