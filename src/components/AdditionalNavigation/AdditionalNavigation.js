@@ -1,18 +1,19 @@
 import { NavLink, withRouter } from 'react-router-dom';
 import './AdditionalNavigation.scss';
 
-const AdditionalNavigation = ({ match }) => {
+const AdditionalNavigation = ({ children, match }) => {
   const { url } = match;
 
   return (
-    <>
-      <p>Additional information</p>
+    <nav className="AddNav">
+      {children}
+
       <ul>
         <li>
           <NavLink
             to={`${url}/cast`}
-            className="NavLink"
-            activeClassName="NavLink--active"
+            className="AddNavLink"
+            activeClassName="AddNavLink--active"
           >
             Cast
           </NavLink>
@@ -20,14 +21,14 @@ const AdditionalNavigation = ({ match }) => {
         <li>
           <NavLink
             to={`${url}/reviews`}
-            className="NavLink"
-            activeClassName="NavLink--active"
+            className="AddNavLink"
+            activeClassName="AddNavLink--active"
           >
             Reviews
           </NavLink>
         </li>
       </ul>
-    </>
+    </nav>
   );
 };
 

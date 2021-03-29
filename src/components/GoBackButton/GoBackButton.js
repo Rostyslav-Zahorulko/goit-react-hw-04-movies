@@ -1,6 +1,8 @@
+import './GoBackButton.scss';
+
 const GoBackButton = ({ onClick }) => {
   return (
-    <button type="button" onClick={onClick}>
+    <button className="GoBackButton" type="button" onClick={onClick}>
       Go back
     </button>
   );

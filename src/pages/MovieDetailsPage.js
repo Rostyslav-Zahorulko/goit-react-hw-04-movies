@@ -108,7 +108,9 @@ class MovieDetailsPage extends Component {
           <>
             <GoBackButton onClick={this.handleGoBack} />
             <MovieCard options={options} />
-            <AdditionalNavigation />
+            <AdditionalNavigation>
+              <h3>Additional information</h3>
+            </AdditionalNavigation>
           </>
         ) : (
           <ApologyMessage />

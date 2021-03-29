@@ -16,13 +16,13 @@ const MovieCard = ({ options }) => {
       <img width={200} src={imgSrc} alt={title || name} />
 
       <div className="MovieCard__content">
-        <h2>
+        <h1>
           {title || name} ({movieReleaseYear})
-        </h2>
+        </h1>
         <p>User Score: {userScore}%</p>
         <h3>Overview</h3>
         <p>{overview}</p>
-        <h4>Genres</h4>
+        <h3>Genres</h3>
         <p>{movieGenres}</p>
       </div>
     </div>

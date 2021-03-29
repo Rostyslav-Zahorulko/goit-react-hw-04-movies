@@ -1,19 +1,17 @@
 .NavList {
   display: flex;
-  margin: 0;
-  padding: 20px;
+  list-style-type: none;
+  padding: 0;
 }
 
-.NavList__item {
-  list-style-type: none;
-
-  &:not(:last-child) {
-    margin-right: 20px;
-  }
+.NavList__item:not(:last-child) {
+  margin-right: 20px;
 }
 
 .NavLink {
+  font-size: 20px;
   color: currentColor;
+  text-decoration: none;
 }
 
 .NavLink--active {
