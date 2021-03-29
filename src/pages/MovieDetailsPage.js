@@ -1,14 +1,19 @@
-import { Component } from 'react';
+import { Component, Suspense, lazy } from 'react';
 import { Route } from 'react-router-dom';
 import routes from '../routes';
 import GoBackButton from '../components/GoBackButton';
 import MovieCard from '../components/MovieCard';
 import AdditionalNavigation from '../components/AdditionalNavigation';
 import ApologyMessage from '../components/ApologyMessage';
-import Cast from '../components/Cast';
-import Reviews from '../components/Reviews';
 import moviesApi from '../services/movies-api';
 import defaultMoviePoster from '../images/defaultMoviePoster.jpg';
+
+const Cast = lazy(() =>
+  import('../components/Cast/' /* webpackChunkName: "cast" */),
+);
+const Reviews = lazy(() =>
+  import('../components/Reviews/' /* webpackChunkName: "reviews" */),
+);
 
 class MovieDetailsPage extends Component {
   state = {
@@ -116,8 +121,10 @@ class MovieDetailsPage extends Component {
           <ApologyMessage />
         )}
 
-        <Route path={`${match.path}/cast`} component={Cast} />
-        <Route path={`${match.path}/reviews`} component={Reviews} />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Route path={`${match.path}/cast`} component={Cast} />
+          <Route path={`${match.path}/reviews`} component={Reviews} />
+        </Suspense>
       </>
     );
   }
